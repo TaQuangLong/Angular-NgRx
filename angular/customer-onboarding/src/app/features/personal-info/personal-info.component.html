@@ -1,0 +1,45 @@
+<div class="wizard-container">
+  <div class="wizard-header">
+    <div class="step active">1</div>
+    <div class="step-line"></div>
+    <div class="step">2</div>
+    <div class="step-line"></div>
+    <div class="step">3</div>
+  </div>
+
+  <h2>Personal Information</h2>
+
+  <form [formGroup]="form" (ngSubmit)="next()">
+    <div class="form-group">
+      <label for="name">Full Name *</label>
+      <input id="name" type="text" formControlName="name" placeholder="Enter full name" />
+      <span class="error" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">
+        Name is required (min 2 characters).
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="address">Address *</label>
+      <textarea id="address" rows="3" formControlName="address" placeholder="Enter address"></textarea>
+      <span class="error" *ngIf="form.get('address')?.invalid && form.get('address')?.touched">
+        Address is required.
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label>Gender *</label>
+      <div class="radio-group">
+        <label><input type="radio" formControlName="gender" value="Male" /> Male</label>
+        <label><input type="radio" formControlName="gender" value="Female" /> Female</label>
+        <label><input type="radio" formControlName="gender" value="Other" /> Other</label>
+      </div>
+      <span class="error" *ngIf="form.get('gender')?.invalid && form.get('gender')?.touched">
+        Please select a gender.
+      </span>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn-primary">Next &rarr;</button>
+    </div>
+  </form>
+</div>

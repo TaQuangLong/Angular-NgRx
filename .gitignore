@@ -1,0 +1,21 @@
+# Angular
+angular/**/node_modules/
+angular/**/dist/
+angular/**/.angular/
+angular/**/coverage/
+
+# ASP.NET Core
+asp-net-core/**/bin/
+asp-net-core/**/obj/
+asp-net-core/**/*.user
+asp-net-core/**/.vs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDEs
+.idea/
+.vscode/.history/
+*.suo
+*.ncrunch*

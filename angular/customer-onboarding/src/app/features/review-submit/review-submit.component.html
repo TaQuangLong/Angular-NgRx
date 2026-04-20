@@ -1,0 +1,51 @@
+<div class="wizard-container">
+  <div class="wizard-header">
+    <div class="step done">1</div>
+    <div class="step-line done"></div>
+    <div class="step done">2</div>
+    <div class="step-line done"></div>
+    <div class="step active">3</div>
+  </div>
+
+  <!-- ── Success state (form data cleared from store, submitted=true) ───── -->
+  <ng-container *ngIf="submitted$ | async">
+    <div class="success-box">
+      <div class="success-icon">&#10003;</div>
+      <h2>Customer Saved!</h2>
+      <p>The customer information has been submitted successfully.</p>
+      <button class="btn-primary" (click)="restart()">Register Another Customer</button>
+    </div>
+  </ng-container>
+
+  <!-- ── Review &amp; Submit ──────────────────────────────────────────────── -->
+  <ng-container *ngIf="!(submitted$ | async)">
+    <h2>Review &amp; Submit</h2>
+
+    <div class="flow-badge" *ngIf="flowId$ | async as fid">
+      Flow: <code>{{ fid }}</code>
+    </div>
+
+    <div class="summary-card" *ngIf="personalInfo$ | async as info">
+      <h3>Personal Information</h3>
+      <div class="summary-row"><span>Name</span><strong>{{ info.name }}</strong></div>
+      <div class="summary-row"><span>Address</span><strong>{{ info.address }}</strong></div>
+      <div class="summary-row"><span>Gender</span><strong>{{ info.gender }}</strong></div>
+    </div>
+
+    <div class="summary-card" *ngIf="contactDetails$ | async as contact">
+      <h3>Contact Details</h3>
+      <div class="summary-row"><span>Email</span><strong>{{ contact.email }}</strong></div>
+      <div class="summary-row"><span>Phone</span><strong>{{ contact.phoneNumber }}</strong></div>
+    </div>
+
+    <div class="error-box" *ngIf="error$ | async as err">{{ err }}</div>
+
+    <div class="form-actions">
+      <button class="btn-secondary" (click)="back()" [disabled]="submitting$ | async">&larr; Back</button>
+      <button class="btn-primary" (click)="submit()" [disabled]="submitting$ | async">
+        <span *ngIf="submitting$ | async">Submitting...</span>
+        <span *ngIf="!(submitting$ | async)">Submit &#10003;</span>
+      </button>
+    </div>
+  </ng-container>
+</div>
