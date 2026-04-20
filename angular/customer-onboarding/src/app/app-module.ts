@@ -11,9 +11,10 @@ import { App } from './app';
 import { PersonalInfoComponent }   from './features/personal-info/personal-info.component';
 import { ContactDetailsComponent } from './features/contact-details/contact-details.component';
 import { ReviewSubmitComponent }   from './features/review-submit/review-submit.component';
-import { CustomerEffects }         from './store/customer.effects';
-import { customerReducerFactory }  from './store/customer.reducer';
-import { FlowIdService }           from './services/flow-id.service';
+import { CustomerEffects }                from './store/customer.effects';
+import { customerReducerFactory }         from './store/customer.reducer';
+import { FlowIdService }                  from './services/flow-id.service';
+import { sessionStorageSyncMetaReducer }  from './store/storage-sync.meta-reducer';
 
 @NgModule({
   declarations: [
@@ -27,9 +28,10 @@ import { FlowIdService }           from './services/flow-id.service';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    StoreModule.forRoot({
-      customer: customerReducerFactory(new FlowIdService()),
-    }),
+    StoreModule.forRoot(
+      { customer: customerReducerFactory(new FlowIdService()) },
+      { metaReducers: [sessionStorageSyncMetaReducer] },
+    ),
     EffectsModule.forRoot([CustomerEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, name: 'Customer Onboarding' }),
   ],

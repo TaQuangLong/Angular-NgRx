@@ -9,6 +9,7 @@ asp-net-core/**/bin/
 asp-net-core/**/obj/
 asp-net-core/**/*.user
 asp-net-core/**/.vs/
+asp-net-core/**/logs/
 
 # OS
 .DS_Store
